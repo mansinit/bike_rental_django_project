@@ -1,0 +1,21 @@
+
+{% extends 'vehicles/base.html' %}
+{% block content %}
+<form action="{% url 'display-vehicle-admin' %}" method="POST">
+    {% csrf_token %}
+    <h5>Check available vehicles in :</h5>
+    <label for="station">Station Name: </label>
+    <select name="station" id="station">
+        <option value=""> Choose a station </option>
+        
+        {% for station_name in stations %}
+        <option value="{{ station_name.station.id }}" {% if station_name.station.id == station_id  %} selected="selected" {% endif %}>{{ station_name.station }}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+    <input type="submit" value="Submit"/>
+    <!-- whatever station is submitted, print all vehicles on that station -->
+</form>
+
+
+{% endblock content %}

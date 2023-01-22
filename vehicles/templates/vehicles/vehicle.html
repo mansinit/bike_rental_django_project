@@ -1,0 +1,28 @@
+{% extends 'vehicles/base.html' %}
+{% block content %}
+<table class="table">
+  <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Engine</th>
+        <th scope="col">Manufacture Year</th>
+        <th scope="col">Brand</th>
+        <th scope="col">Price Per Day</th>
+      </tr>
+    </thead>
+      {% for vehicle in vehicle_reg %}
+      
+  <tr>
+      <!--th scope="row">{{ vehicle.id }}</th-->
+      <td>{{ forloop.counter }}</td>
+      <td> {{ vehicle.vehicle_grp.name }} </td>
+      <td> {{ vehicle.vehicle_grp.engine }} </td>
+      <td> {{ vehicle.vehicle_grp.manufacturing_year }} </td>
+      <td> {{ vehicle.vehicle_grp.brand }}</td>
+      <td> {{ vehicle.vehicle_grp.price_per_day }}</td>
+      
+  </tr>
+      {% endfor %}
+</table>
+{% endblock content %}

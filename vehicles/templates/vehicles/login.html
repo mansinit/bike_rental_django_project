@@ -1,0 +1,12 @@
+{% extends "vehicles/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h5>Log in</h5>
+    <p>{{ message }}</p>
+    <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit" >Submit</button>
+    </form>
+
+{% endblock content %}

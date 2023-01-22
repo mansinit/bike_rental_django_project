@@ -1,0 +1,17 @@
+{% extends 'vehicles/base.html' %}
+{% block content %}
+    <form action="{% url 'vehicle-bikes' %}" method="POST">
+        {% csrf_token %}
+        <label for="station">Station Name:</label>
+        <select name="station" id="station">
+            <option value=""> Choose a station </option>
+            {% for station in stations %}
+            <option value="{{ station.id }}" {% if station.id == station_id  %} selected="selected" {% endif %}>{{ station }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <input type="submit" value="Submit"/>
+        <!-- whatever station is submitted, print all vehicles on that station -->
+    </form>
+    
+{% endblock content %}
