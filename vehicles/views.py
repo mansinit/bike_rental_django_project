@@ -60,6 +60,8 @@ def station_admin_add_vehicle_group(request):
             return redirect('add-vehicle-group')
     else:
         form=AddVehicleGroup()
+        station_admin_name = StationAdmin.objects.get(id=request.user.id)
+        form.fields['updated_by'].queryset = QuerySet(station_admin_name).filter(username=station_admin_name)
     return render(request,'vehicles/station_admin_add_vehicle_group.html',{'form':form})
 
 @login_required
