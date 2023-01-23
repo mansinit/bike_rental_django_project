@@ -74,3 +74,8 @@ class AddVehicleInfo(ModelForm):
     class Meta:
         model=VehicleInfo
         fields='__all__'
+
+class AddStation(ModelForm):
+    class Meta:
+        model=Station
+        fields='__all__'

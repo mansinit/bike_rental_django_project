@@ -13,7 +13,8 @@ from .forms import (
     StationAdminRegistrationForm, 
     LoginForm,
     AddVehicleGroup,
-    AddVehicleInfo
+    AddVehicleInfo,
+    AddStation
 )
 
 
@@ -50,6 +51,7 @@ def station_admin_home(request):
         return render(request,'vehicles/vehicle.html',context)
     return render(request,'vehicles/station-admin-home.html',context)
 
+@login_required
 def station_admin_add_vehicle_group(request):
     if request.method=="POST":
         form=AddVehicleGroup(request.POST)
@@ -59,19 +61,36 @@ def station_admin_add_vehicle_group(request):
             return redirect('add-vehicle-group')
     else:
         form=AddVehicleGroup()
+        station_admin_name = StationAdmin.objects.get(id=request.user.id)
+        form.fields['updated_by'].queryset = QuerySet(station_admin_name).filter(username=station_admin_name)
     return render(request,'vehicles/station_admin_add_vehicle_group.html',{'form':form})
 
+@login_required
 def station_admin_add_vehicle_info(request):
     if request.method=="POST":
         form=AddVehicleInfo(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request,f'Vehicle add successfully')
+            messages.success(request,f'Vehicle added successfully')
             return redirect('add-vehicle-info')
     else:
         form=AddVehicleInfo()
         stations = StationAdmin.objects.get(id=request.user.id).station
         form.fields['station'].queryset = QuerySet(stations).filter(name=stations.name)
+
+    return render(request,'vehicles/station_admin_add_vehicle_group.html',{'form':form})
+
+
+@login_required
+def station_admin_add_station(request):
+    if request.method=="POST":
+        form=AddStation(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,f'New station added successfully')
+            return redirect('add-station')
+    else:
+        form=AddStation()
 
     return render(request,'vehicles/station_admin_add_vehicle_group.html',{'form':form})
 

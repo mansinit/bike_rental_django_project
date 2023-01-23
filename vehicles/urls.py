@@ -18,5 +18,6 @@ urlpatterns=[
     path('registerstationadmin/',views.register_station_admin,name='station-admin-register'),
     path('add_a_vehicle/',views.station_admin_add_vehicle_info,name='add-vehicle-info'),
     path('add_a_vehicle_group/',views.station_admin_add_vehicle_group,name='add-vehicle-group'),
+    path('add_a_station/',views.station_admin_add_station,name='add-station'),
     path('display_vehicle/',views.station_admin_home,name='display-vehicle-admin'),
 ]       
