@@ -50,6 +50,7 @@ def station_admin_home(request):
         return render(request,'vehicles/vehicle.html',context)
     return render(request,'vehicles/station-admin-home.html',context)
 
+@login_required
 def station_admin_add_vehicle_group(request):
     if request.method=="POST":
         form=AddVehicleGroup(request.POST)
@@ -61,6 +62,7 @@ def station_admin_add_vehicle_group(request):
         form=AddVehicleGroup()
     return render(request,'vehicles/station_admin_add_vehicle_group.html',{'form':form})
 
+@login_required
 def station_admin_add_vehicle_info(request):
     if request.method=="POST":
         form=AddVehicleInfo(request.POST)
