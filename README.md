@@ -1,4 +1,4 @@
-# vani_coach_django_project
+# bike_rental_django_project
 
 Django assignment for vehicle rent:
 
